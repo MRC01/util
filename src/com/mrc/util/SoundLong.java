@@ -1,5 +1,5 @@
 /* Copyright 2012 by Michael R. Clements
- * This source code is the intellectual property of the author.
+ * This software is open source and free to distribute and create derivative works.
 */
 package com.mrc.util;
 
