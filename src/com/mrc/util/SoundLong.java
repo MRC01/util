@@ -1,6 +1,5 @@
 /* Copyright 2012 by Michael R. Clements
  * This source code is the intellectual property of the author.
- * This is not open source. All rights reserved.
 */
 package com.mrc.util;
 
