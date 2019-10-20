@@ -1,0 +1,49 @@
+<project default="all">
+	<property environment="env"/>
+	<property name="src.dir" value="src"/>
+	<property name="bin.dir" value="bin"/>
+	<property name="test.dir" value="test"/>
+	<property name="res.dir" value="resource"/>
+	<property name="junit" value="${env.JUNIT_HOME}"/>
+	<property name="android.dir" value="${env.ANDROID_HOME}"/>
+	<property name="android.version" value="${env.ANDROID_VERSION}"/>
+	<property name="android.sdk.dir" value="${android.dir}/platforms/android-${android.version}"/>
+	<property name="cp" value="${bin.dir}:${android.sdk.dir}/android.jar"/>
+
+	<target name="dirs">
+		<mkdir dir="${bin.dir}"/>
+		<mkdir dir="${test.dir}"/>
+	</target>
+
+	<target name="all" depends="main,test,jar"/>
+
+	<target name="main" depends="dirs">
+		<javac includeantruntime="false" classpath="${cp}" debug="on" srcdir="${src.dir}" destdir="${bin.dir}">
+			<compilerarg value="-Xlint:all"/>
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="${bin.dir}"/>
+		<delete file="util.jar"/>
+	</target>
+
+	<target name="jar" depends="copyFiles">
+		<jar destfile="util.jar" basedir="bin" manifest="manifest.txt">
+		</jar>
+	</target>
+	
+	<target name="copyFiles">
+	    <!-- Any extra files (resources, etc.) you need in the JAR, copy them here.
+		<copy todir="${bin.dir}/resource">
+			<fileset dir="${res.dir}" />
+		</copy>
+		-->
+	</target>
+
+	<target name="test">
+		<javac includeantruntime="false" classpath="${cp};${junit}/junit-4.8.2.jar" debug="on" srcdir="${test.dir}" destdir="${bin.dir}">
+			<compilerarg value="-Xlint:all"/>
+		</javac>
+	</target>
+</project>
